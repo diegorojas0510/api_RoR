@@ -1,0 +1,55 @@
+Versiónes:
+* ruby 3.0.1p64 (2021-04-05 revision 0fb782ee38) [x86_64-darwin22]
+* rails: Rails 7.0.8
+* postgres (PostgreSQL) 14.9 (Homebrew)
+
+
+Creación del proyecto rails new blogapi --api -T
+* con el flag --api nos aseguramos de que rails solo va a crear lo archivos necesario para la api y no va incluir las vistas
+* Con el flag -T no vamos a generar nada de pruebas  ya que rails maneja minitest o RSpec tambien se puede utilizar
+
+ ### la diferencia entre una api con rails y una app completa en rails se basa en:
+Es que en el config/application solo vamos a requerir lo necesario para nuestra api y  no all como esta en la mayoria de proyectos
+támbien podemos ver que en los controladores heredamos de API y no de base ya que no es necesario tener las vistas
+
+## instalación de gemas necesarias
+* RSpec: gema para hacer pruebas basada en TDD, para autodocumentar nuestras pruebas
+* shoulda-matchers: gema que nos provee validaciones para RSpec.
+* factory_bot: para crear modelos falsos al momento de hacer pruebas (información falsa y reciclada), mejor tenerlo centralizado en una sola parte
+* database_cleaner: para la limpieza de nuestra base de datos y que inicie como empezamos
+* faker: la cual nos permite generar información falsa nombres TC falsos.
+
+Debemos elegir el grupo de instalación de las gemas dado a que puede ser contraproducente donde las ponemos.
+
+Bundle install para instalar las gemas, la unica gema que vamos a confiigurar es rspec:  rails generate rspec:install
+
+## Configuración de rspec
+* https://github.com/rspec/rspec-rails
+* rails generate rspec:install
+* ejecutar pruebas: bundle exec rspec
+
+## Configurar shoulda-matchers:
+* https://github.com/thoughtbot/shoulda-matchers#getting-started
+
+## Configurar DatabaseClear:
+* https://github.com/DatabaseCleaner/database_cleaner
+
+## generando mi primer help endpoint
+* ejemplos de endpoint:
+    * https://status.heroku.com/
+    * https://status.aircall.io/
+    * https://status.hubspot.com/
+    * https://www.githubstatus.com/
+    * https://api.twitterstat.us/
+    * https://status.sentry.io/uptime
+
+## las carpetas donde vive las pruebas de integración de nuestros endpoint spec/request
+ para poner las pruebas creamos un nuevo file llamado health_spec.rb donde se implementara TDD primero las pruebas y luego se implementara la funcionalidad
+
+
+# creamos los modelos necesarios para nuestra aplicación
+* rails g model user email:string name:string auth_token:string
+
+# creamos el modelo post para nuestra api con cada uno de los tipo de datos que necesitan nuestros capos y haciendo una referencia a user(creación llave foranea)
+* rails g model post title:string content:string published:boolean user:references
+
