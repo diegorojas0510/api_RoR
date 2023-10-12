@@ -53,3 +53,14 @@ Bundle install para instalar las gemas, la unica gema que vamos a confiigurar es
 # creamos el modelo post para nuestra api con cada uno de los tipo de datos que necesitan nuestros capos y haciendo una referencia a user(creación llave foranea)
 * rails g model post title:string content:string published:boolean user:references
 
+# creamos las pruebas de post utilizamos rspec y factory bot para los datos fake
+* creamos los modelos con factiry bot
+rails g factory_bot:model user email:string name:string auth_token:string
+rails g factory_bot:model post title:string content:string published:boolean user:references
+
+# Creamos el controlador posts y sus metodos index y show
+# creamos las rutas con resource y para ver los enpoint que nos interesan podemos utilizar rails routes | grep "posts"
+
+# podemos utilizar byebug para debbugear el código o fallos
+
+Implementamos las pruebas para POST y PUT
