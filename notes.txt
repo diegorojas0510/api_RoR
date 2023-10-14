@@ -64,3 +64,5 @@ rails g factory_bot:model post title:string content:string published:boolean use
 # podemos utilizar byebug para debbugear el código o fallos
 
 Implementamos las pruebas para POST y PUT
+
+# Se implementa serializer para los objetos de rails en formato json

@@ -11,7 +11,11 @@ class PostsController < ApplicationController
     def index
     # return posts published
     @posts = Post.where(published: true)
+    if params[:search].nil? || params[:search].present?
+      @posts = PostsSearchService.search(@posts, params[:search])
+    end
     render json: @posts, status: :ok
+
   end
   # GET /post/{id}
   def show
