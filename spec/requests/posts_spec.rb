@@ -46,14 +46,14 @@ RSpec.describe "Posts", type: :request do
           title: "titulo",
           content: "content",
           published: false,
-          user: user.id
+          user_id: user.id
         }
       }
     # POST HTTP method
     post "/posts", params: req_payload
     payload = JSON.parse(response.body)
     expect(payload).to_not be_empty
-    expect(payload['id']).to_not be_empty
+    expect(payload['id']).to_not be_nil
     expect(response).to have_http_status(:created)
     end
 
@@ -62,7 +62,7 @@ RSpec.describe "Posts", type: :request do
         post: {
           content: "content",
           published: false,
-          user: user.id
+          user_id: user.id
         }
       }
       # POST HTTP method
