@@ -66,3 +66,11 @@ rails g factory_bot:model post title:string content:string published:boolean use
 Implementamos las pruebas para POST y PUT
 
 # Se implementa serializer para los objetos de rails en formato json
+
+# Para solucionar el problema de N+1 query problem podemos hacer lo siguiente:
+    # nos vamos hasta la prueba que tenemos hacia nuestra BD identificamos la linea y el path
+        * bundle exec rspec spec/requests/posts_spec.rb:33 solo vamos a ejecutar esta prueba
+        * limpiamos los log rm log/test.log
+        * creamos el archivo touch log/test.log
+        * iniciamos la prueba tail -f log/test.log y en otra terminal ejecutamos la prueba bundle exec rspec spec/requests/posts_spec.rb:33
+        * podemos ver como con solamente hacer un include en el controlador pasamos de 1100ms a 200ms render json: @posts.includes(:user), status: :ok
